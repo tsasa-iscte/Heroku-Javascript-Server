@@ -6,9 +6,9 @@
   "scripts":{
     "start": "node server.js"
   },
-"author":"",
-"license":"ISC",
-"dependencies":{
+  "author":"",
+  "license":"ISC",
+  "dependencies":{
     "express":"^4.16.4"
   }
 }
