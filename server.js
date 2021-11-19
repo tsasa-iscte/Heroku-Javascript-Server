@@ -5,7 +5,7 @@ const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8080
 let docker
 let client_id = 0
 let clients = new Map()
