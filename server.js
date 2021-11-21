@@ -24,6 +24,7 @@ router.post("/docker_post",(req, res) => {
   let id = parseInt(req.body.id)
   clients.get(id).send(req.body.data)
   clients.delete(id)
+  res.send("200");
 });
 
 app.use("/", router);
