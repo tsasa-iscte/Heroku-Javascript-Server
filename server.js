@@ -37,6 +37,7 @@ function handle_client_get(req, res){
     let url_tail = req.params[0] || ""     
     docker.send(client_id + "|" + url_tail)
     clients.set(client_id, res)
+    docker = null
   }else{
     res.send("Docker not connected!")
   }
@@ -50,6 +51,7 @@ function handle_client_post(req, res){
     let url_tail = req.params[0] || ""
     docker.send(client_id + "|" + url_tail + "|" + JSON.stringify(req.body))  //req.body -> dados do POST
     clients.set(client_id, res)
+    docker = null
   }else{
     res.send("Docker not connected!")
   }
