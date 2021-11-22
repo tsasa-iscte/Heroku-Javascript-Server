@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require("body-parser");
 const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000
 let docker
@@ -38,7 +38,7 @@ function handle_client_get(req, res){
     client_id += 1
     let url_tail = req.params[0] || ""   
     //docker.send(client_id + "|" + url_tail)
-    docker.send(JSON.stringify(req))
+    docker.send(req)
     clients.set(client_id, res)
     docker = null
   }else{
