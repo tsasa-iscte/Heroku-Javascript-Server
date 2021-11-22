@@ -32,10 +32,10 @@ app.use("/", router);
 router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
+  console.log("Client Get")
   if (docker){
     client_id += 1
     let url_tail = req.params[0] || ""   
-    console.log("Client Get")
     docker.send(client_id + "|" + url_tail)
     clients.set(client_id, res)
     docker = null
