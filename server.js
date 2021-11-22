@@ -18,7 +18,6 @@ router.get('/docker_hello', (req, res) => {
   //if (/* is really our docker)*/)
   console.log("Docker Hello")
   docker = res
-  res.send("200");
 })
 
 router.post("/docker_post",(req, res) => {
@@ -35,7 +34,8 @@ router.get('*', handle_client_get)
 function handle_client_get(req, res){
   if (docker){
     client_id += 1
-    let url_tail = req.params[0] || ""     
+    let url_tail = req.params[0] || ""   
+    console.log("Client Get")
     docker.send(client_id + "|" + url_tail)
     clients.set(client_id, res)
     docker = null
