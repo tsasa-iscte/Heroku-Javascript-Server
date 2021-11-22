@@ -18,7 +18,6 @@ router.get('/docker_hello', (req, res) => {
   //if (/* is really our docker)*/)
   console.log("Docker Hello")
   docker = res
-  res.send("200");
 })
 
 router.post("/docker_post",(req, res) => {
