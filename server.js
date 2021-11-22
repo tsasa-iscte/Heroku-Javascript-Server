@@ -33,7 +33,7 @@ app.use("/", router);
 router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
-  console.log("Client Get")
+  console.log(req)
   if (docker){
     client_id += 1
     let url_tail = req.params[0] || ""   
