@@ -38,7 +38,7 @@ function handle_client_get(req, res){
     client_id += 1
     let url_tail = req.params[0] || ""   
     //docker.send(client_id + "|" + url_tail)
-    docker.send(req)
+    docker.send(JSON.stringify(req))
     clients.set(client_id, res)
     docker = null
   }else{
