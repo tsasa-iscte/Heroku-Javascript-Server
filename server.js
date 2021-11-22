@@ -12,7 +12,7 @@ let clients = new Map()
 
 app.listen(port, () => {
   console.log('ADS App listening on port ' + port)
-}).setTimeout(999999999);
+})
 
 router.get('/docker_hello', (req, res) => {
   //if (/* is really our docker)*/)
