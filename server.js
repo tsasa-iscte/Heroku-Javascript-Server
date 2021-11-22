@@ -21,7 +21,7 @@ router.get('/docker_hello', (req, res) => {
         res.end();
     });
   docker = res
-  res.send("200");
+  //res.send("200");
 })
 
 router.post("/docker_post",(req, res) => {
