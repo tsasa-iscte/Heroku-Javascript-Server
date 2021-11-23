@@ -23,19 +23,18 @@ router.get('/docker_hello', (req, res) => {
   special_client_id += 1
   console.log(special_client_id)
   let this_client_id = special_client_id
-  console.log(this_client_id)
+  console.log("This_client_id inicial: " + this_client_id)
   special_clients.set(this_client_id, res)
   docker = res
   setTimeout(function(){
-    console.log(docker!= null)
     if(docker != null ){
       res.send("200");
-      console.log(this_client_id)
+      console.log("This_client_id timeout: " + this_client_id)
       special_clients.delete(this_client_id)
       docker = null
       console.log("Docker Bye")
     }
-  }, 25000);
+  }, 5000);
 })
 
 router.post("/docker_post",(req, res) => {
