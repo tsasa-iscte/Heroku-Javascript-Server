@@ -33,6 +33,8 @@ router.post("/docker_post",(req, res) => {
   clients.get(id).send(req.body.data)
   clients.delete(id)
   res.send("200");
+  docker = null
+  console.log("Docker Bye")
 });
 
 app.use("/", router);
