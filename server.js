@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const port = process.env.PORT || 5000
 let docker
 let client_id = 0
+let special_client_id = 0
 let clients = new Map()
+let special_clients = new Map()
 
 app.listen(port, () => {
   console.log('ADS App listening on port ' + port)
@@ -17,11 +19,19 @@ app.listen(port, () => {
 router.get('/docker_hello', (req, res) => {
   //if (/* is really our docker)*/)
   console.log("Docker Hello")
+  console.log(special_client_id)
+  special_client_id += 1
+  console.log(special_client_id)
+  let this_client_id = special_client_id
+  console.log(this_client_id)
+  special_clients.set(this_client_id, res)
   docker = res
   setTimeout(function(){
     console.log(docker!= null)
     if(docker != null ){
       res.send("200");
+      console.log(this_client_id)
+      special_clients.delete(this_client_id)
       docker = null
       console.log("Docker Bye")
     }
