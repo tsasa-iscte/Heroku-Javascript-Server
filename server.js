@@ -19,7 +19,7 @@ router.get('/docker_hello', (req, res) => {
   console.log("Docker Hello")
   docker = res
   setTimeout(function(){
-    console.log(docker)
+    console.log(docker!= null)
     if(docker != null ){
       res.send("200");
       docker = null
