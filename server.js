@@ -17,9 +17,9 @@ app.listen(port, () => {
 router.get('/docker_hello', (req, res) => {
   //if (/* is really our docker)*/)
   console.log("Docker Hello")
-  setTimeout(25000, function(){
+  setTimeout(function(){
      res.send("200");
-  });
+  }, 5000);
   docker = res
   console.log("Docker Bye")
 })
