@@ -27,7 +27,7 @@ router.get('/docker_hello', (req, res) => {
   special_clients.set(this_client_id, res)
   docker = res
   setTimeout(function(){
-    if(docker != null ){
+    if(special_clients.get(this_client_id) != null){
       res.send("200");
       console.log("This_client_id timeout: " + this_client_id)
       special_clients.delete(this_client_id)
@@ -38,9 +38,12 @@ router.get('/docker_hello', (req, res) => {
 })
 
 router.post("/docker_post",(req, res) => {
-  let id = parseInt(req.body.id)
-  clients.get(id).send(req.body.data)
-  clients.delete(id)
+  let client_id = parseInt(req.body.client_id)
+  let special_client_id = parseInt(req.body.special_client_id)
+  clients.get(client_id).send(req.body.data)
+  special_clients.get(special_client_id).send("200")
+  clients.delete(client_id)
+  special_clients.delete(special_client_id)
   res.send("200");
   docker = null
   console.log("Docker Bye")
