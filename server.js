@@ -71,7 +71,7 @@ function handle_client_get(req, res){
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
-    var url_parts = url.parse(request.url, true);
+    var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     special_clients.get(special_client_id).send("GET|" + client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.headers) + "|" + query)
     clients.set(client_id, res)
