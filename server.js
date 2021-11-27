@@ -70,7 +70,7 @@ function handle_client_get(req, res){
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
-    special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.headers) + "|" + JSON.stringify(req.body))
+    special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.headers) + "|" + JSON.stringify(req.body) + "|" + JSON.stringify(req))
     clients.set(client_id, res)
     special_clients.set(special_client_id, null)
   }
