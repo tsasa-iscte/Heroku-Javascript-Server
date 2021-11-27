@@ -64,9 +64,7 @@ app.use("/", router);
 router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
-  console.log(req.params)
-  console.log(req.headers)
-  console.log(req.body)
+  console.log("ENTROU NO GET")
   let special_client_id = get_idle_special_client()
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
