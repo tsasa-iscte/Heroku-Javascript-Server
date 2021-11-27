@@ -65,11 +65,8 @@ router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
   console.log(req.params)
-  for (var entry of special_clients.entries()) {
-     console.log(entry[0] + "=" + entry[1])
-  }
   let special_client_id = get_idle_special_client()
-  if (special_clients.get(special_client_id) != null){
+  for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
     special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail)
@@ -81,11 +78,11 @@ function handle_client_get(req, res){
 router.post('*', handle_client_post)
 
 function handle_client_post(req, res){
-  while (get_idle_special_client() != null){
+  for (var special_client = get_idle_special_client(); special_client != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
-    docker.send(client_id + "|" + url_tail + "|" + JSON.stringify(req.body))  //req.body -> dados do POST
+    special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.body))
     clients.set(client_id, res)
-    docker = null
+    special_clients.set(special_client_id, null)
   }
 }
