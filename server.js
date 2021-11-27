@@ -44,6 +44,8 @@ function get_idle_special_client(){
     for (var entry of special_clients.entries()) {
         var key = entry[0], value = entry[1];
         if (value != null){
+            special_clients.get(key) = null
+            console.log("Chave null: " + special_clients.get(key))
             console.log("Chave: " + key)
             return key
         }
@@ -65,12 +67,12 @@ router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
   console.log(req.params)
-  while (get_idle_special_client() != null){
+  let special_client_id = get_idle_special_client()
+  if (special_client_id != null){
     client_id += 1
     let url_tail = req.params[0] || ""   
-    docker.send(client_id + "|" + url_tail)
+    special_clients.get(special_client_id).send(client_id + "|" + url_tail)
     clients.set(client_id, res)
-    docker = null
   }
 }
 
