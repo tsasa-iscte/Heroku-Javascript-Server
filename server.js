@@ -16,9 +16,9 @@ app.listen(port, () => {
   console.log('ADS App listening on port ' + port)
 })
 
-router.get('/docker_hello', (req, res) => {
+router.get('/special_client_hello', (req, res) => {
   //if (/* is really our docker)*/)
-  console.log("Docker Hello")
+  console.log("Special Client Hello")
   console.log(special_client_id)
   special_client_id += 1
   console.log(special_client_id)
@@ -27,18 +27,31 @@ router.get('/docker_hello', (req, res) => {
   special_clients.set(this_client_id, res)
   docker = res
   setTimeout(function(){
-      docker_bye(this_client_id, res)
+      get_idle_special_client()
+      special_client(this_client_id, res)
   }, 5000);
 })
 
-function docker_bye(this_client_id, res){
+function special_client(this_client_id, res){
   if(special_clients.get(this_client_id) != null){
-      res.send("Docker Bye");
+      res.send("Special Client Bye");
       console.log("This_client_id timeout: " + this_client_id)
       special_clients.delete(this_client_id)
       docker = null
-      console.log("Docker Bye")
+      console.log("Special Client Bye")
    }
+ }
+
+function get_idle_special_client(){
+    for (var entry of special_clients.entries()) {
+        var key = entry[0], value = entry[1];
+        if (value != null){
+            console.log("Chave: " + key)
+            return key
+        }
+        console.log(key + " = " + value);
+    }
+    return null
  }
 
 router.post("/docker_post",(req, res) => {
