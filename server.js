@@ -68,10 +68,10 @@ router.get('*', handle_client_get)
 function handle_client_get(req, res){
   console.log(req.params)
   let special_client_id = get_idle_special_client()
-  if (special_client_id != null){
+  if (special_clients.get(special_client_id) != null){
     client_id += 1
-    let url_tail = req.params[0] || ""   
-    special_clients.get(special_client_id).send(client_id + "|" + url_tail)
+    let url_tail = req.params[0] || ""
+    special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail)
     clients.set(client_id, res)
   }
 }
