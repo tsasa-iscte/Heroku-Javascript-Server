@@ -77,13 +77,11 @@ function handle_client_get(req, res){
 router.post('*', handle_client_post)
 
 function handle_client_post(req, res){
-  if (docker){
+  while (get_idle_special_client() != null){
     client_id += 1
     let url_tail = req.params[0] || ""
     docker.send(client_id + "|" + url_tail + "|" + JSON.stringify(req.body))  //req.body -> dados do POST
     clients.set(client_id, res)
     docker = null
-  }else{
-    res.send("Docker not connected!")
   }
 }
