@@ -6,7 +6,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000
-let docker
 let client_id = 0
 let special_client_id = 0
 let clients = new Map()
@@ -25,7 +24,6 @@ router.get('/special_client_hello', (req, res) => {
   let this_client_id = special_client_id
   console.log("This_client_id inicial: " + this_client_id)
   special_clients.set(this_client_id, res)
-  docker = res
   setTimeout(function(){
       get_idle_special_client()
       special_client(this_client_id, res)
@@ -34,10 +32,9 @@ router.get('/special_client_hello', (req, res) => {
 
 function special_client(this_client_id, res){
   if(special_clients.get(this_client_id) != null){
-      res.send("Special Client Bye");
+      special_clients.get(this_client_id).send("Special Client Bye");
       console.log("This_client_id timeout: " + this_client_id)
       special_clients.delete(this_client_id)
-      docker = null
       console.log("Special Client Bye")
    }
  }
