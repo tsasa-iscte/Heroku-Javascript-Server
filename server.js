@@ -65,14 +65,12 @@ router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
   console.log(req.params)
-  if (docker){
+  while (get_idle_special_client() != null){
     client_id += 1
     let url_tail = req.params[0] || ""   
     docker.send(client_id + "|" + url_tail)
     clients.set(client_id, res)
     docker = null
-  }else{
-    res.send("Docker not connected!")
   }
 }
 
