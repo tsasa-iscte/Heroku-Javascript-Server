@@ -18,12 +18,12 @@ app.listen(port, () => {
 
 router.get('/special_client_hello', (req, res) => {
   //if (/* is really our docker)*/)
-  console.log("Special Client Hello")
-  console.log(special_client_id)
+  //console.log("Special Client Hello")
+  //console.log(special_client_id)
   special_client_id += 1
-  console.log(special_client_id)
+  //console.log(special_client_id)
   let this_client_id = special_client_id
-  console.log("This_client_id inicial: " + this_client_id)
+  //console.log("This_client_id inicial: " + this_client_id)
   special_clients.set(this_client_id, res)
   setTimeout(function(){
       get_idle_special_client()
@@ -34,7 +34,7 @@ router.get('/special_client_hello', (req, res) => {
 function special_client_bye(this_client_id){
   if(special_clients.get(this_client_id) != null){
       special_clients.get(this_client_id).send("Special Client Bye");
-      console.log("This_client_id timeout: " + this_client_id)
+      //console.log("This_client_id timeout: " + this_client_id)
    }
    special_clients.delete(this_client_id)
    console.log("Special Client Bye")
@@ -44,8 +44,6 @@ function get_idle_special_client(){
     for (var entry of special_clients.entries()) {
         var key = entry[0], value = entry[1];
         if (value != null){
-            special_clients.set(key, null)
-            console.log("Chave null: " + special_clients.get(key))
             console.log("Chave: " + key)
             return key
         }
@@ -76,6 +74,7 @@ function handle_client_get(req, res){
     let url_tail = req.params[0] || ""
     special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail)
     clients.set(client_id, res)
+    special_clients.set(key, null)
   }
 }
 
