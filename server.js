@@ -10,6 +10,7 @@ let client_id = 0
 let special_client_id = 0
 let clients = new Map()
 let special_clients = new Map()
+let clients_and_special_clients = new Map()
 
 app.listen(port, () => {
   console.log('ADS App listening on port ' + port)
@@ -26,17 +27,17 @@ router.get('/special_client_hello', (req, res) => {
   special_clients.set(this_client_id, res)
   setTimeout(function(){
       get_idle_special_client()
-      special_client(this_client_id, res)
+      special_client_bye(this_client_id, res)
   }, 5000);
 })
 
-function special_client(this_client_id, res){
+function special_client_bye(this_client_id){
   if(special_clients.get(this_client_id) != null){
       special_clients.get(this_client_id).send("Special Client Bye");
       console.log("This_client_id timeout: " + this_client_id)
-      special_clients.delete(this_client_id)
-      console.log("Special Client Bye")
    }
+   special_clients.delete(this_client_id)
+   console.log("Special Client Bye")
  }
 
 function get_idle_special_client(){
@@ -46,7 +47,6 @@ function get_idle_special_client(){
             console.log("Chave: " + key)
             return key
         }
-        console.log(key + " = " + value);
     }
     return null
  }
@@ -55,12 +55,8 @@ router.post("/docker_post",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
   clients.get(client_id).send(req.body.data)
-  special_clients.get(special_client_id).send("200")
   clients.delete(client_id)
-  special_clients.delete(special_client_id)
-  res.send("200");
-  docker = null
-  console.log("Docker Bye")
+  special_client_bye(special_client_id)
 });
 
 app.use("/", router);
