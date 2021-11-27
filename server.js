@@ -10,7 +10,6 @@ let client_id = 0
 let special_client_id = 0
 let clients = new Map()
 let special_clients = new Map()
-let clients_and_special_clients = new Map()
 
 app.listen(port, () => {
   console.log('ADS App listening on port ' + port)
@@ -28,7 +27,7 @@ router.get('/special_client_hello', (req, res) => {
   setTimeout(function(){
       get_idle_special_client()
       special_client_bye(this_client_id, res)
-  }, 5000);
+  }, 25000);
 })
 
 function special_client_bye(this_client_id){
