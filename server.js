@@ -44,7 +44,7 @@ function get_idle_special_client(){
     for (var entry of special_clients.entries()) {
         var key = entry[0], value = entry[1];
         if (value != null){
-            special_clients.get(key) = null
+            special_clients.set(key, null)
             console.log("Chave null: " + special_clients.get(key))
             console.log("Chave: " + key)
             return key
