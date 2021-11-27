@@ -67,6 +67,9 @@ router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
   console.log(req.params)
+  for (var entry of special_clients.entries()) {
+     console.log(entry[0] + "=" + entry[1])
+  }
   let special_client_id = get_idle_special_client()
   if (special_clients.get(special_client_id) != null){
     client_id += 1
