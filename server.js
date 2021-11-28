@@ -69,13 +69,11 @@ router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
   console.log("ENTROU NO GET")
-  let special_client_id = get_idle_special_client()
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
-    //console.log("Query: " + query.toString())
     special_clients.get(special_client_id).send("GET|" + client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.headers) + "|" + JSON.stringify(query))
     clients.set(client_id, res)
     special_clients.set(special_client_id, null)
@@ -85,10 +83,11 @@ function handle_client_get(req, res){
 router.post('*', handle_client_post)
 
 function handle_client_post(req, res){
+  console.log("ENTROU NO GET")
   for (var special_client = get_idle_special_client(); special_client != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
-    special_clients.get(special_client_id).send(client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.body))
+    special_clients.get(special_client_id).send("POST|" + client_id + "|" + special_client_id + "|" + url_tail + "|" + JSON.stringify(req.headers) + "|" + JSON.stringify(req.body))
     clients.set(client_id, res)
     special_clients.set(special_client_id, null)
   }
