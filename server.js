@@ -56,11 +56,11 @@ router.post("/docker_post",(req, res) => {
   let special_client_id = parseInt(req.body.special_client_id)
   //console.log(res)
   //console.log(res.headers)
-  res.setHeader('content-type','application/x-www-form-urlencoded; charset=UTF-8');
+  //res.setHeader('content-type','application/x-www-form-urlencoded; charset=UTF-8');
   console.log(res)
   console.log(res.headers)
-  //var contentType = res.headers['content-type'];
-  //console.log("Content Type: " + contentType);
+  var contentType = res.headers['isJson'];
+  console.log("Content Type: " + contentType);
   //if (contentType == "application/json"){
   //    clients.get(client_id).send(req.body.data)
   //} else {
