@@ -54,6 +54,7 @@ function get_idle_special_client(){
 router.post("/docker_post",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
+  console.log(res)
   console.log(res.headers)
   var contentType = res.headers['content-type'];
   console.log("Content Type: " + contentType);
