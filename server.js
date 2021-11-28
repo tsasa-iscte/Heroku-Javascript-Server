@@ -54,8 +54,6 @@ function get_idle_special_client(){
 router.post("/docker_post",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
-  let isJson = parseBoolean(req.body.special_client_id)
-  console.log(isJson)
   //console.log(res)
   //console.log(res.headers)
   //res.setHeader('content-type','application/x-www-form-urlencoded; charset=UTF-8');
