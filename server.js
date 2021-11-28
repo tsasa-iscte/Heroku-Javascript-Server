@@ -56,6 +56,9 @@ router.post("/docker_post",(req, res) => {
   let special_client_id = parseInt(req.body.special_client_id)
   console.log(res)
   console.log(res.headers)
+  res.setHeader('content-type','text/html');
+  console.log(res)
+  console.log(res.headers)
   var contentType = res.headers['content-type'];
   console.log("Content Type: " + contentType);
   if (contentType == "application/json"){
