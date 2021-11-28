@@ -54,18 +54,18 @@ function get_idle_special_client(){
 router.post("/docker_post",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
+  //console.log(res)
+  //console.log(res.headers)
+  //res.setHeader('content-type','text/html');
   console.log(res)
   console.log(res.headers)
-  res.setHeader('content-type','text/html');
-  console.log(res)
-  console.log(res.headers)
-  var contentType = res.headers['content-type'];
-  console.log("Content Type: " + contentType);
-  if (contentType == "application/json"){
-      clients.get(client_id).send(JSON.parse(req.body.data))
-  } else {
+  //var contentType = res.headers['content-type'];
+  //console.log("Content Type: " + contentType);
+  //if (contentType == "application/json"){
+  //    clients.get(client_id).send(JSON.parse(req.body.data))
+  //} else {
       clients.get(client_id).send(req.body.data)
-  }
+  //}
   clients.delete(client_id)
   special_client_bye(special_client_id)
 });
