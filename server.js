@@ -59,6 +59,7 @@ router.post("/docker_post",(req, res) => {
   } else {
       clients.get(client_id).send(req.body.data)
   }
+  res.send("200")
   clients.delete(client_id)
   special_client_bye(special_client_id)
 });
