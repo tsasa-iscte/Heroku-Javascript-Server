@@ -17,13 +17,8 @@ app.listen(port, () => {
 })
 
 router.get('/special_client_hello', (req, res) => {
-  //if (/* is really our docker)*/)
-  //console.log("Special Client Hello")
-  //console.log(special_client_id)
   special_client_id += 1
-  //console.log(special_client_id)
   let this_client_id = special_client_id
-  //console.log("This_client_id inicial: " + this_client_id)
   special_clients.set(this_client_id, res)
   setTimeout(function(){
       get_idle_special_client()
@@ -58,7 +53,7 @@ router.post("/special_client_bye",(req, res) => {
   } else {
       clients.get(client_id).send(req.body.data)
   }
-  //res.send("200")
+  res.send("200")
   clients.delete(client_id)
   disconnect_special_client(special_client_id)
 });
