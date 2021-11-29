@@ -50,7 +50,7 @@ function get_idle_special_client(){
     return null
  }
 
-router.post("/docker_bye",(req, res) => {
+router.post("/docker_post",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
   if (req.body.isJson === 'true'){
