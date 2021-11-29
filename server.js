@@ -27,11 +27,11 @@ router.get('/special_client_hello', (req, res) => {
   special_clients.set(this_client_id, res)
   setTimeout(function(){
       get_idle_special_client()
-      special_client_bye(this_client_id, res)
+      disconnect_special_client(this_client_id, res)
   }, 25000);
 })
 
-function special_client_bye(this_client_id){
+function disconnect_special_client(this_client_id){
   if(special_clients.get(this_client_id) != null){
       special_clients.get(this_client_id).send("Special Client Bye");
    }
@@ -50,7 +50,7 @@ function get_idle_special_client(){
     return null
  }
 
-router.post("/docker_post",(req, res) => {
+router.post("/special_client_bye",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
   if (req.body.isJson === 'true'){
@@ -60,7 +60,7 @@ router.post("/docker_post",(req, res) => {
   }
   //res.send("200")
   clients.delete(client_id)
-  special_client_bye(special_client_id)
+  disconnect_special_client(special_client_id)
 });
 
 app.use("/", router);
