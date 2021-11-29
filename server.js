@@ -34,7 +34,6 @@ router.get('/special_client_hello', (req, res) => {
 function special_client_bye(this_client_id){
   if(special_clients.get(this_client_id) != null){
       special_clients.get(this_client_id).send("Special Client Bye");
-      //console.log("This_client_id timeout: " + this_client_id)
    }
    special_clients.delete(this_client_id)
    console.log("Special Client Bye")
@@ -51,7 +50,7 @@ function get_idle_special_client(){
     return null
  }
 
-router.post("/docker_post",(req, res) => {
+router.post("/docker_bye",(req, res) => {
   let client_id = parseInt(req.body.client_id)
   let special_client_id = parseInt(req.body.special_client_id)
   if (req.body.isJson === 'true'){
@@ -69,7 +68,6 @@ app.use("/", router);
 router.get('*', handle_client_get)
 
 function handle_client_get(req, res){
-  console.log("ENTROU NO GET")
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
@@ -84,7 +82,6 @@ function handle_client_get(req, res){
 router.post('*', handle_client_post)
 
 function handle_client_post(req, res){
-  console.log("ENTROU NO GET")
   for (var special_client = get_idle_special_client(); special_clients.get(special_client_id) != null; ){
     client_id += 1
     let url_tail = req.params[0] || ""
